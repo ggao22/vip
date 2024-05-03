@@ -38,7 +38,7 @@ def main(args, rep='vip'):
     embedding_names = {'vip': 'VIP'}
     colors = {'vip': 'tab:blue'}
    
-    os.makedirs('embedding_curves', exist_ok=True)
+    os.makedirs('embedding_data', exist_ok=True)
 
 
     data = np.load(data_path,allow_pickle=True)
@@ -72,6 +72,11 @@ def main(args, rep='vip'):
 
     fig, ax = plt.subplots(nrows=1, ncols=2,figsize=(12,6))
 
+    # write distances
+    data_dict = {'distances': distances}
+    npz_path = 'embedding_data/distances.npz'
+    np.savez(npz_path, **data_dict)
+
     # Plot VIP Embedding Distance and Goal Image
     ax[0].plot(np.arange(len(distances)), distances, color=colors[rep], label=embedding_names[rep], linewidth=3)
     ax[1].imshow(imgs_cur[-1].permute(1,2,0) / 255)
@@ -85,7 +90,7 @@ def main(args, rep='vip'):
     ax[1].set_xticks([])
     ax[1].set_yticks([])
 
-    plt.savefig(f"embedding_curves/{rep}.png",bbox_inches='tight')
+    plt.savefig(f"embedding_data/{rep}.png",bbox_inches='tight')
     plt.close()
 
     ax0_xlim = ax[0].get_xlim()
@@ -121,7 +126,9 @@ def main(args, rep='vip'):
 
     # Generate animated reward curve
     ani = FuncAnimation(fig, animate, interval=20, repeat=False, frames=len(distances)+30)
-    ani.save(f"embedding_curves/{rep}.gif", dpi=100, writer=PillowWriter(fps=25))
+    ani.save(f"embedding_data/{rep}.gif", dpi=100, writer=PillowWriter(fps=25))
+
+    
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
