@@ -122,7 +122,7 @@ def main(data_path, rep='vip'):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('data_path', type=str,
+    parser.add_argument('--data_path', type=str,
                     help='A required string for the path to the data file.')
     args = parser.parse_args()
     rep = 'vip'
