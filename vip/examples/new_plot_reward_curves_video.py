@@ -50,8 +50,6 @@ def main(data_path, rep='vip'):
         imgs_cur.append(transform(Image.fromarray(imgs[i].astype(np.uint8))))
     imgs_cur = torch.stack(imgs_cur)
 
-    plt.imshow(np.array(transform(Image.fromarray(imgs[0].astype(np.uint8)))))
-
     with torch.no_grad():
         embeddings = model(imgs_cur.cuda())
         embeddings = embeddings.cpu().numpy()
