@@ -95,7 +95,7 @@ def main(data_path, rep='vip'):
         if i >= len(distances):
             i = len(distances)-1
         line1 = ax[0].plot(ranges[0:i+1], distances[0:i+1], color="tab:blue", label="image", linewidth=3)
-        line2 = ax[1].imshow(imgs_cur[i].permute(1,2,0) / 255)
+        line2 = ax[1].imshow(imgs_cur[i].permute(1,2,0))
 
         ax[0].set_title(f"VIP Embedding Distance", fontsize=15)
         ax[0].legend(loc="upper right")
