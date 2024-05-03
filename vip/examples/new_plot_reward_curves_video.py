@@ -26,7 +26,11 @@ def load_embedding(rep='vip'):
                         T.ToTensor()])
     return model, transform 
 
-def main(data_path, rep='vip'):
+def main(args, rep='vip'):
+    data_path = args.data_path
+    start = args.start
+    end = args.end
+
     model, transform = load_embedding(rep)
     model.to('cuda')
     model.eval()
@@ -38,7 +42,7 @@ def main(data_path, rep='vip'):
 
 
     data = np.load(data_path,allow_pickle=True)
-    imgs = data['images'][:99]
+    imgs = data['images'][start:end]
     print(f'Imported Images of Shape: {imgs.shape}')
     # get correct rgb channels
     for i in range(len(imgs)):
@@ -121,7 +125,11 @@ def main(data_path, rep='vip'):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_path', type=str,
-                    help='A required string for the path to the data file.')
+                    help='string for the path to the data file.')
+    parser.add_argument('--start', type=int,
+                    help='int for starting index of image.')
+    parser.add_argument('--end', type=int,
+                    help='int for ending index of image.')
     args = parser.parse_args()
     rep = 'vip'
-    main(args.data_path, rep)
+    main(args, rep)
