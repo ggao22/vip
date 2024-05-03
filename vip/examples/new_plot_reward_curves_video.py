@@ -38,7 +38,8 @@ def main(data_path, rep='vip'):
 
 
     data = np.load(data_path)
-    images = data['images'][:99]
+    imgs = data['images'][:99]
+    print(f'Imported Images of Shape: {imgs.shape}')
     # get correct rgb channels
     for i in range(len(imgs)):
         imgs[i] = cv2.cvtColor(imgs[i], cv2.COLOR_RGB2BGR)
@@ -121,8 +122,8 @@ def main(data_path, rep='vip'):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('image_path', type=str,
-                    help='A required string for the path to the image file.')
+    parser.add_argument('data_path', type=str,
+                    help='A required string for the path to the data file.')
     args = parser.parse_args()
     rep = 'vip'
-    main(args.image_path, rep)
+    main(args.data_path, rep)
