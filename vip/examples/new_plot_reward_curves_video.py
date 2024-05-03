@@ -37,7 +37,7 @@ def main(data_path, rep='vip'):
     os.makedirs('embedding_curves', exist_ok=True)
 
 
-    data = np.load(data_path,allow_pickle=True)
+    data = np.load(data_path)
     imgs = data['images'][:99]
     print(f'Imported Images of Shape: {imgs.shape}')
     # get correct rgb channels
