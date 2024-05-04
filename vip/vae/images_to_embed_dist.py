@@ -30,6 +30,7 @@ def main(args, rep='vip'):
     data_path = args.data_path
     start = args.start
     end = args.end
+    produce_gif = args.produce_gif
 
     model, transform = load_embedding(rep)
     model.to('cuda')
@@ -79,7 +80,7 @@ def main(args, rep='vip'):
 
     # Plot VIP Embedding Distance and Goal Image
     ax[0].plot(np.arange(len(distances)), distances, color=colors[rep], label=embedding_names[rep], linewidth=3)
-    ax[1].imshow(imgs_cur[-1].permute(1,2,0) / 255)
+    ax[1].imshow(imgs_cur[-1].permute(1,2,0))
 
     ax[0].legend(loc="upper right")
     ax[0].set_xlabel("Frame", fontsize=15)
@@ -125,8 +126,9 @@ def main(args, rep='vip'):
         return line1, line2
 
     # Generate animated reward curve
-    ani = FuncAnimation(fig, animate, interval=20, repeat=False, frames=len(distances)+30)
-    ani.save(f"embedding_data/{rep}.gif", dpi=100, writer=PillowWriter(fps=25))
+    if produce_gif:
+        ani = FuncAnimation(fig, animate, interval=20, repeat=False, frames=len(distances)+30)
+        ani.save(f"embedding_data/{rep}.gif", dpi=100, writer=PillowWriter(fps=25))
 
     
 
@@ -138,6 +140,8 @@ if __name__ == '__main__':
                     help='int for starting index of image.')
     parser.add_argument('--end', type=int,
                     help='int for ending index of image.')
+    parser.add_argument('--produce_gif',
+                    help='boolean for git production')
     args = parser.parse_args()
     rep = 'vip'
     main(args, rep)

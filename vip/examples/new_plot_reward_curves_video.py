@@ -43,7 +43,7 @@ def main(args, rep='vip'):
 
     data = np.load(data_path,allow_pickle=True)
     imgs = data['images'][start:end]
-    
+
     print(f'Imported Images of Shape: {imgs.shape}')
     # get correct rgb channels
     for i in range(len(imgs)):
@@ -74,7 +74,7 @@ def main(args, rep='vip'):
 
     # Plot VIP Embedding Distance and Goal Image
     ax[0].plot(np.arange(len(distances)), distances, color=colors[rep], label=embedding_names[rep], linewidth=3)
-    ax[1].imshow(imgs_cur[-1].permute(1,2,0) / 255)
+    ax[1].imshow(imgs_cur[-1].permute(1,2,0))
 
     ax[0].legend(loc="upper right")
     ax[0].set_xlabel("Frame", fontsize=15)
