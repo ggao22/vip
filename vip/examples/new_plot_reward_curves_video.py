@@ -42,7 +42,10 @@ def main(args, rep='vip'):
 
 
     data = np.load(data_path,allow_pickle=True)
-    imgs = data['images'][start:end]
+    if end != -1:
+        imgs = data['images'][start:end]
+    else:
+        imgs = data['images']
 
     print(f'Imported Images of Shape: {imgs.shape}')
     # get correct rgb channels

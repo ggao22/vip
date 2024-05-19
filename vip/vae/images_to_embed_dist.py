@@ -43,7 +43,10 @@ def main(args, rep='vip'):
 
 
     data = np.load(data_path,allow_pickle=True)
-    imgs = data['images'][start:end]
+    if end != -1:
+        imgs = data['images'][start:end]
+    else:
+        imgs = data['images']
     
     print(f'Imported Images of Shape: {imgs.shape}')
     # get correct rgb channels
@@ -74,7 +77,7 @@ def main(args, rep='vip'):
     fig, ax = plt.subplots(nrows=1, ncols=2,figsize=(12,6))
 
     # write distances
-    data_dict = {'distances': distances}
+    data_dict = {'distances': distances.reshape(-1,1)}
     npz_path = 'embedding_data/distances.npz'
     np.savez(npz_path, **data_dict)
 
