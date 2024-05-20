@@ -143,7 +143,7 @@ if __name__ == '__main__':
                     help='int for starting index of image.')
     parser.add_argument('--end', type=int,
                     help='int for ending index of image.')
-    parser.add_argument('--produce_gif', type=bool,
+    parser.add_argument('--produce_gif', default=False, action="store_true",
                     help='boolean for git production')
     args = parser.parse_args()
     rep = 'vip'
