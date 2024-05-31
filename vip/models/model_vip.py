@@ -70,10 +70,9 @@ class VIP(nn.Module):
         # if not already resized and cropped, then add those in preprocessing
         if obs_shape != (3, 224, 224):
             preprocess = nn.Sequential(
-                        transforms.Resize(256),
-                        transforms.CenterCrop(224),
+                        transforms.Resize(224),
                         self.normlayer,
-                )
+            )
         else:
             preprocess = nn.Sequential(
                         self.normlayer,
