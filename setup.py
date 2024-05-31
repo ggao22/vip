@@ -25,7 +25,7 @@ setup(
     'gdown==4.4.0', 
     'torch>=1.7.1',
     'torchvision>=0.8.2',
-    'omegaconf==2.1.1',
+    'omegaconf>=2.2',
     'hydra-core==1.3.2',
     'pillow==9.0.1',
     'opencv-python',
