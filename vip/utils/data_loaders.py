@@ -48,8 +48,7 @@ class VIPBuffer(IterableDataset):
         
         # Augmentations
         self.preprocess = torch.nn.Sequential(
-                        transforms.Resize(256),
-                        transforms.CenterCrop(224)
+                        transforms.Resize(224)
                 )
         if doaug in ["rc", "rctraj"]:
             self.aug = torch.nn.Sequential(
