@@ -54,7 +54,7 @@ def main(args):
 
     data = []
     for file in sorted(os.listdir(data_path), key=lambda x: int(os.path.basename(x).split('.')[0])):
-        img = transform(torchvision.io.read_image(file) / 255.0)
+        img = transform(torchvision.io.read_image(os.path.join(data_path, file)) / 255.0)
         data.append(img)
     data = torch.stack(data)
     
