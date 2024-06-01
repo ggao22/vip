@@ -19,6 +19,8 @@ import torchvision.transforms as T
 import torchvision.models as models
 from PIL import Image  
 
+from vip import cleanup_config
+
 
 def load_embedding(configpath, modelpath):
     modelcfg = omegaconf.OmegaConf.load(configpath)
