@@ -55,12 +55,12 @@ def main(args, rep):
     for file in sorted(os.listdir(data_path), key=lambda x: int(os.path.basename(x).split('.')[0])):
         img = transform(torchvision.io.read_image(os.path.join(data_path, file)) / 255.0)
         data.append(img)
-    data = torch.stack(data)
+    imgs_cur = torch.stack(data)
     
-    print(f'Imported Images of Shape: {data.shape}')
+    print(f'Imported Images of Shape: {imgs_cur.shape}')
 
     with torch.no_grad():
-        embeddings = model(data.cuda())
+        embeddings = model(imgs_cur.cuda())
         embeddings = embeddings.cpu().numpy()
 
     # get goal embedding
