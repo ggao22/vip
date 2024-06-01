@@ -129,8 +129,8 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('model-path', type=str)
-    parser.add_argument('cfg-path', type=str)
+    parser.add_argument('model_path', type=str)
+    parser.add_argument('cfg_path', type=str)
     parser.add_argument('--data_path', type=str,
                     help='string for the path to the data file.')
     parser.add_argument('--produce_gif', default=False, action="store_true",
