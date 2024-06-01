@@ -77,8 +77,9 @@ def main(args, rep):
     fig, ax = plt.subplots(nrows=1, ncols=2,figsize=(12,6))
 
     # write distances
-    data_dict = {'distances': distances.reshape(-1,1)}
-    npz_path = 'embedding_data/distances.npz'
+    data_dict = {'distances': distances.reshape(-1,1),
+                    'embedding': embeddings}
+    npz_path = 'embedding_data/trajectory.npz'
     np.savez(npz_path, **data_dict)
 
     # Plot VIP Embedding Distance and Goal Image
