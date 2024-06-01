@@ -23,6 +23,10 @@ from vip import cleanup_config
 
 
 def load_embedding(configpath, modelpath):
+    if torch.cuda.is_available():
+        device = "cuda"
+    else:
+        device = "cpu"
     modelcfg = omegaconf.OmegaConf.load(configpath)
     cleancfg = cleanup_config(modelcfg)
     rep = hydra.utils.instantiate(cleancfg)
