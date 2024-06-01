@@ -136,5 +136,4 @@ if __name__ == '__main__':
     parser.add_argument('--produce_gif', default=False, action="store_true",
                     help='boolean for git production')
     args = parser.parse_args()
-    rep = 'vip'
-    main(args, rep)
+    main(args)
