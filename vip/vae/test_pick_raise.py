@@ -44,7 +44,7 @@ def main(args):
     os.makedirs('embedding_data', exist_ok=True)
 
     data = []
-    for file in sorted(os.listdir(data_path)):
+    for file in sorted(os.listdir(data_path), key=lambda x: int(os.path.basename(x).split('.')[0])):
         img = transform(torchvision.io.read_image(file) / 255.0)
         data.append(img)
     data = torch.stack(data)
