@@ -38,7 +38,7 @@ def load_embedding(configpath, modelpath):
     transform = T.Compose([T.Resize(224)])
     return model, transform 
 
-def main(args):
+def main(args, rep):
     data_path = args.data_path
     produce_gif = args.produce_gif
 
@@ -144,4 +144,5 @@ if __name__ == '__main__':
     parser.add_argument('--produce_gif', default=False, action="store_true",
                     help='boolean for git production')
     args = parser.parse_args()
-    main(args)
+    rep = 'vip'
+    main(args, rep)
