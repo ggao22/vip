@@ -35,8 +35,7 @@ def load_embedding(configpath, modelpath):
     vip_state_dict = torch.load(modelpath, map_location=torch.device(device))['vip']
     model.load_state_dict(vip_state_dict)
 
-    transform = T.Compose([T.Resize(224),
-                    T.ToTensor()])
+    transform = T.Compose([T.Resize(224)])
     return model, transform 
 
 def main(args):
