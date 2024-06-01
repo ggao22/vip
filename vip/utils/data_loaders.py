@@ -72,7 +72,7 @@ class VIPBuffer(IterableDataset):
             vidlen = m["len"]
             vid = m["path"]
         else: 
-            video_paths = glob.glob(f"{self.datapath}/[0-9]*")
+            video_paths = glob.glob(f"{self.datapath}/video[0-9]*")
             num_vid = len(video_paths)
 
             video_id = np.random.randint(0, int(num_vid)) 
