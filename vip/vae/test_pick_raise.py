@@ -38,6 +38,12 @@ def load_embedding(configpath, modelpath):
     transform = T.Compose([T.Resize(224)])
     return model, transform 
 
+def latest_file(globstr):
+    fn_candidates = sorted(glob.glob(globstr), reverse=True)
+    if len(fn_candidates) == 0:
+        raise RuntimeError(f"No files match the pattern {globstr}")
+    return fn_candidates[0]
+
 def main(args, rep):
     data_path = args.data_path
     produce_gif = args.produce_gif
@@ -138,7 +144,7 @@ def main(args, rep):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('model_path', type=str)
+    parser.add_argument('model_path', type=latest_file)
     parser.add_argument('cfg_path', type=str)
     parser.add_argument('--data_path', type=str,
                     help='string for the path to the data file.')
