@@ -10,8 +10,8 @@ load_snap: ""
 # replay buffer
 num_workers: 10
 batch_size: 32 
-train_steps: 4001
-eval_freq: 250
+train_steps: 5001
+eval_freq: 500
 
 # misc
 seed: 1
