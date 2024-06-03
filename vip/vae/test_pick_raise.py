@@ -78,7 +78,7 @@ def main(args, rep):
 
     # write distances
     data_dict = {'distances': distances.reshape(-1,1),
-                    'embedding': embeddings}
+                    'embeddings': embeddings}
     npz_path = 'embedding_data/trajectory.npz'
     np.savez(npz_path, **data_dict)
 
