@@ -59,9 +59,14 @@ def main(args, rep):
 
     data = []
     files = sorted(os.listdir(data_path), key=lambda x: int(os.path.basename(x).split('.')[0]))
+    for file in sorted(os.listdir(data_path), key=lambda x: int(os.path.basename(x).split('.')[0])):
+        img = transform(torchvision.io.read_image(os.path.join(data_path, file)) / 255.0)
+        data.append(img)
+    imgs_cur = torch.stack(data)
     
     embeddings = []
     with torch.no_grad():
+        # NOT USING imgs_cur due to GPU RAM limits
         for file in files:
             img = torch.unsqueeze(transform(torchvision.io.read_image(os.path.join(data_path, file)) / 255.0), 0)
             embedding = model(img.cuda())
