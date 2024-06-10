@@ -63,6 +63,8 @@ def main(args, rep):
         img = transform(torchvision.io.read_image(os.path.join(data_path, file)) / 255.0)
         data.append(img)
     imgs_cur = torch.stack(data)
+
+    print(f'Imported Images of Shape: {imgs_cur.shape}')
     
     embeddings = []
     with torch.no_grad():
