@@ -58,16 +58,18 @@ def main(args, rep):
     os.makedirs('embedding_data', exist_ok=True)
 
     data = []
-    for file in sorted(os.listdir(data_path), key=lambda x: int(os.path.basename(x).split('.')[0])):
-        img = transform(torchvision.io.read_image(os.path.join(data_path, file)) / 255.0)
-        data.append(img)
-    imgs_cur = torch.stack(data)
+    files = sorted(os.listdir(data_path), key=lambda x: int(os.path.basename(x).split('.')[0]))
     
     print(f'Imported Images of Shape: {imgs_cur.shape}')
 
+    embeddings = []
     with torch.no_grad():
-        embeddings = model(imgs_cur.cuda())
-        embeddings = embeddings.cpu().numpy()
+        for file in files:
+            img = torch.unsqueeze(transform(torchvision.io.read_image(os.path.join(data_path, file)) / 255.0), 0)
+            embedding = model(img.cuda())
+            embeddings.append(embedding.cpu().numpy())
+    embeddings = np.squeeze(embeddings, 1)
+    print(f"Embeddings shape: {embeddings.shape}")
 
     # get goal embedding
     goal_embedding = embeddings[-1]
