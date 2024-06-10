@@ -60,8 +60,6 @@ def main(args, rep):
     data = []
     files = sorted(os.listdir(data_path), key=lambda x: int(os.path.basename(x).split('.')[0]))
     
-    print(f'Imported Images of Shape: {imgs_cur.shape}')
-
     embeddings = []
     with torch.no_grad():
         for file in files:
